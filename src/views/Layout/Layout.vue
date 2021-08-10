@@ -2,7 +2,9 @@
   <div>
     <el-container>
       <el-header>
-        <div class="title">Vue3+ElementPlus develop &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{time}}</div>
+        <div class="title">&nbsp;&nbsp;&nbsp; Vue3+ElementPlus develop &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{time}}
+          <i class="el-icon-user user" @click="logOut"></i>
+        </div>
       </el-header>
       <el-container>
         <el-aside width="200px">
@@ -82,23 +84,23 @@ export default {
           children: [
             {
               id: "3",
-              menuName: "图表",
-              menuIcon: "el-icon-coin",
-              routePath: "charts",
-              children: [],
-            },
-            {
-              id: "4",
               menuName: "列表",
               menuIcon: "el-icon-tickets",
               routePath: "list",
               children: [],
             },
             {
-              id: "5",
+              id: "4",
               menuName: "表格",
               menuIcon: "el-icon-document-remove",
               routePath: "table",
+              children: [],
+            },
+            {
+              id: "5",
+              menuName: "图表",
+              menuIcon: "el-icon-coin",
+              routePath: "charts",
               children: [],
             },
           ],
@@ -143,6 +145,17 @@ export default {
       var time = year + "-" + month + "-" + data + "      " + hours + ":" + minute + ":" + second;
       this.time = time;
     },
+    logOut(){
+      this.$confirm('是否确认退出登录?', '退出登录', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        localStorage.removeItem("token");
+        this.$message.success("退出成功!");
+        this.$router.push("login");
+      }).catch();
+    },
   },
 };
 </script>
@@ -163,10 +176,15 @@ export default {
 }
 .el-menu {
   border-right: none;
-  /* 完美解决title不靠左问题 */
-  text-align: left;
 }
 a {
   text-decoration: none;
+}
+.user {
+  position: absolute;
+  right: 40px;
+  font-size: 30px;
+  line-height: 60px;
+  color: #fff;
 }
 </style>

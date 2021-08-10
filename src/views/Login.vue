@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-card class="loginCard" shadow="hover">
-      <el-form ref="form" :model="form" label-width="46px" :rules="rules">
+      <el-form ref="form" :model="form" label-width="46px" >
         <div style="margin-bottom: 20px">登录/注册</div>
         <el-form-item label="账号" prop="name" label-width="50">
           <el-input v-model="form.name" prefix-icon="el-icon-user"></el-input>
@@ -49,7 +49,7 @@ export default {
             });
             this.loading = false;
           } else {
-            this.$message.error("密码错误,请重试!");
+            this.$message.error("登陆失败,请重试!");
           }
         }
       });
